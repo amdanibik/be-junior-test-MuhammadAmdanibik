@@ -13,7 +13,7 @@ Please follow the steps and goal to be successfull candidate.
 * 2 Make two table in database using mysql, preferable if can use ORM like typeorm / sequelize
 * 3 Make web service (API) using nodejs to reflect the two tables above 
 * 4 Movie entity properties (columns) :
-  * id
+     * id
   * name
   * 
 * 5 Cast entity properties (columns) :  
