@@ -1,20 +1,22 @@
 # README #
 
-Hi friends, this is a test for developer internship. 
+Hi friends, this is a test for junior backend developer. 
 
 Please follow the steps and goal to be successfull candidate.
 
 ### What to make? ###
 
-* Use PHP as the main language
-* Call this api http://api.tvmaze.com/search/shows?q=girls and use the json from it. The main properties are url and name, you can use other properties as creative as you want. But the main properties must displayed in UI  
-* Display the data using this design https://imgur.com/MtilNpm
-* Explanation of design in above url (https://imgur.com/MtilNpm) : 
-* 1 Hardcode text Campflix bold style
-* 2 Textbox for search and profile name / user name just fill your name e.g budi erwanto
-* 3 Display a picture from the api using url property can be 1st image in array or any random up to you
-* 4 Display all tv shows from this api http://api.tvmaze.com/search/shows?q=girls, scrollable to the right
-* 5 Bonus if you can implement search api, but not mandatory 
+* Use nodejs as the main language
+* Please refer to this images (https://imgur.com/a/OchYihl)
+* Task details : 
+* 1 Given two entity movies and cast. Entity movies has one to many relationship with cast ( actor / actress )
+* 2 Make two table in database using mysql, preferable if can use ORM like typeorm / sequelize
+* 3 Make web service (API) using nodejs to reflect the two tables above 
+* 4 Movie entity properties (columns) :
+  * id
+  * name
+  * 
+* 5 Cast entity properties (columns) :  
 
 ### How to submit? ###
 
