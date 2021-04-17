@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Warkop DKI",
+        "language": "indonesia",
+        "status": "ended",
+        "rating": 5
+    },
+    {
+        "id": 2,
+        "name": "Iron Man",
+        "language": "english",
+        "status": "ongoing",
+        "rating": 3
+    },
+    {
+        "id": 3,
+        "name": "Forrest Gump",
+        "language": "enlish",
+        "status": "started",
+        "rating": 5
+    },
+    {
+        "id": 4,
+        "name": "Lupin",
+        "language": "french",
+        "status": "ongoing",
+        "rating": 4
+    },
+    {
+        "id": 5,
+        "name": "Thomas and Friends",
+        "language": "english",
+        "status": "ended",
+        "rating": 2
+    },
+    {
+        "id": 6,
+        "name": "Upin dan Ipin",
+        "language": "Malay",
+        "status": "ended",
+        "rating": 4
+    }
+]
