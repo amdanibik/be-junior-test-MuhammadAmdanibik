@@ -7,23 +7,38 @@ const cors = require('cors')
 const routers = require('./routers')
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
-const errorHandler = require('./middlewares/handler.error.middleware')
 const swaggerOptions = require('./config/swagger.config')
 const specs = swaggerJsDoc(swaggerOptions)
-const morgan = require('morgan')
-const fs = require('fs')
-const path = require('path')
+const errorHandler = require('./middlewares/handlerError.middleware')
 const assignReqId = require('./middlewares/assignReqId.middleware')
+const { morgan, formatLog, logStream } = require('./middlewares/logger.middleware')
 
-morgan.token('id', function getId (req) {
-    return req.id
-  })
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+/**
+ * @swagger
+ * 
+ * parameters:
+ *  CommonPathParameterHeader:
+ *    in: header
+ *    name: apiKey
+ *    schema:
+ *    type: string
+ *    required: true
+ * 
+ * components:
+ *  securitySchemes:
+ *      ApiKeyAuth:
+ *          type: apiKey
+ *          in: header
+ *          name: apiKey
+ * 
+ * security:
+ *  - ApiKeyAuth: []
+ */
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 app.use(cors())
 app.use(assignReqId)
-app.use(morgan(':id :remote-addr - :remote-user :method :url :response-time ms ":user-agent"', { stream: accessLogStream }))
+app.use(morgan(formatLog, logStream))
 app.use(express.urlencoded({ extended: true }))
 app.use(routers)
 app.use(errorHandler)

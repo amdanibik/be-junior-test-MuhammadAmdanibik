@@ -23,6 +23,8 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
     "node-uuid": "^1.4.8",
+    "passport": "^0.4.1",
+    "passport-headerapikey": "^1.2.2",
     "sequelize": "^6.6.2",
     "sequelize-cli": "^6.2.0",
     "swagger-jsdoc": "6.0.1",
