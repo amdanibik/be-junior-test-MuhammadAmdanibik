@@ -1,4 +1,4 @@
-const errorHandler = (err, _, res) => {
+const errorHandler = (err, _, res, next) => {
     if (err.name === 'NotFound') {
         return res.status(404).json({
             errors: err.errors
