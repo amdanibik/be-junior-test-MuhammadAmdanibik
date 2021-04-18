@@ -1,12 +1,13 @@
 const MovieRepository = require("../repositories/movie.repository")
 
 class MovieService {
-    static getMovieService() {
+    static getMovieService(name) {
         return new Promise(async (resolve, rejects) => {
             try {
-                const movies = await MovieRepository.getMovieQuery()
+                const movies = await MovieRepository.getMovieQuery(name)
                 return resolve(movies)
             } catch (err) {
+                console.log(err);
                 return rejects(err)
             }
         })

@@ -1,7 +1,8 @@
-const { Movie, Cast, MovieCast } = require('../models')
+const { Movie, Cast, MovieCast, Sequelize } = require('../models')
+const { Op } = require('sequelize')
 
 class MovieRepository {
-    static async getMovieQuery() {
+    static async getMovieQuery(name) {
         return await Movie.findAll({
             attributes: { exclude: [ 'updatedAt', 'createdAt' ] },
             include: [
@@ -17,7 +18,17 @@ class MovieRepository {
                         }
                     ]
                 }
-            ]
+            ],
+            where: {
+                [Op.and]: [
+                    Sequelize.where(
+                        Sequelize.fn('lower', Sequelize.col('Movie.name')),
+                        {
+                          [Op.like]: `%${name || ''}%`
+                        }
+                      )
+                ]
+            }
         })
     }
 }

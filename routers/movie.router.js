@@ -49,6 +49,16 @@ const MovieController = require('../controllers/movie.controller')
  * @swagger
  * /Movies:
  *   get:
+ *     parameters:
+ *      - in: query
+ *        name: name
+ *        description: search by movie's name
+ *        required: false
+ *        schema:
+ *          type: string
+ *          example: Warkop DKI
+ *     security:
+ *      - API_KEY: []
  *     summary: Returns the list of all the movies
  *     tags: [Movies]
  *     responses:
@@ -60,6 +70,12 @@ const MovieController = require('../controllers/movie.controller')
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Movie'
+ *       401:
+ *          description: Error unauthorized
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/ErrorUnauthorized'
  */
 
 router.get('/', MovieController.getMovie)

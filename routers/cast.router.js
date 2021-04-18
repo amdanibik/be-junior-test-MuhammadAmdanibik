@@ -48,6 +48,16 @@ const CastController = require('../controllers/cast.controller')
  * @swagger
  * /Casts:
  *   get:
+ *     parameters:
+ *      - in: query
+ *        name: name
+ *        description: search by cast's name
+ *        required: false
+ *        schema:
+ *          type: string
+ *          example: Indro
+ *     security:
+ *      - API_KEY: []
  *     summary: Returns the list of all the casts
  *     tags: [Casts]
  *     responses:
@@ -56,9 +66,22 @@ const CastController = require('../controllers/cast.controller')
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Cast'
+ *               type: object
+ *               properties:
+ *                  status:
+ *                      type: string
+ *                      example: OK
+ *                  data:
+ *                      type: array
+ *                      items:
+ *                          $ref: '#/components/schemas/Cast'
+ *                                 
+ *       401:
+ *          description: Error unauthorized
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/ErrorUnauthorized'
  */
 router.get('/', CastController.getCast)
 

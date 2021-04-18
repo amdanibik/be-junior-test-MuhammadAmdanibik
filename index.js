@@ -13,28 +13,6 @@ const errorHandler = require('./middlewares/handlerError.middleware')
 const assignReqId = require('./middlewares/assignReqId.middleware')
 const { morgan, formatLog, logStream } = require('./middlewares/logger.middleware')
 
-/**
- * @swagger
- * 
- * parameters:
- *  CommonPathParameterHeader:
- *    in: header
- *    name: apiKey
- *    schema:
- *    type: string
- *    required: true
- * 
- * components:
- *  securitySchemes:
- *      ApiKeyAuth:
- *          type: apiKey
- *          in: header
- *          name: apiKey
- * 
- * security:
- *  - ApiKeyAuth: []
- */
-
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 app.use(cors())
 app.use(assignReqId)
