@@ -7,23 +7,35 @@ services:
         env_file: ./.env
         ports: 
             - "3306:3306"
+        environment: 
+            - WAIT_HOSTS=mysql:3306
+            - WAIT_HOSTS_TIMEOUT=300
+            - WAIT_SLEEP_INTERVAL=30
+            - WAIT_HOST_CONNECT_TIMEOUT=30
         networks: 
             - app-network
-        volumes: 
-            - ./docker-db/my.cnf:/etc/mysql/my.cnf
     
-    app:
+    migration:
         build: 
             context: .
             dockerfile: ./Dockerfile
-        depends_on: 
+        image: app-image
+        depends_on:
             - mysqldb
         tty: true
-        ports: 
-            - "3000:3000"
-        # command: npx sequelize-cli db:migrate
+        command: ["./wait-for-it/wait-for-it.sh", "mysqldb:3306", "--", "npm", "run", "migrate"]
         networks: 
             - app-network
+
+    app:
+        image: app-image 
+        ports: 
+            - "3000:3000"
+        networks: 
+            - app-network
+        depends_on: 
+            - mysqldb
+            - migration
 
 networks: 
     app-network:
