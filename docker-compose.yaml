@@ -36,6 +36,8 @@ services:
         depends_on: 
             - mysqldb
             - migration
+        volumes: 
+            - "./access.log:/access.log:rw"
 
 networks: 
     app-network:
