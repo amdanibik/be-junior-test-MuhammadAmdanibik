@@ -36,8 +36,9 @@ services:
         depends_on: 
             - mysqldb
             - migration
+        command: npm run start
         volumes: 
-            - "./access.log:/access.log:rw"
+            - "./log:/log"
 
 networks: 
     app-network:
