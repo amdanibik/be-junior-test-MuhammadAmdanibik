@@ -6,8 +6,7 @@ const cors = require('cors');
 const db = require('./database/setup');
 
 // Connecting to Database
-let connectionString = process.env.DATABASE_CONNECTION_URL;
-db.connectToDb(connectionString);
+db.connectToDb();
 
 // Connecting to Node JS Server and using additional CORS and URL Encoding package and other related packages for the project
 app.use(cors())
