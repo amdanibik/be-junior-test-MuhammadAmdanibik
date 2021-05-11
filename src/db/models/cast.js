@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     birthday: DataTypes.DATE,
     deadday: DataTypes.DATE,
     rating: DataTypes.INTEGER,
-    deleted_at: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Cast',

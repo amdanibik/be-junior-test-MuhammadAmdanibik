@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Budi",
+    "birthday": "2000-01-01",
+    "deadday": null,
+    "rating": 5
+  },
+  {
+    "name": "Anisa",
+    "birthday": "1950-01-01",
+    "deadday": "2020-01-01",
+    "rating": 4
+  },
+  {
+    "name": "Putri",
+    "birthday": "1980-01-01",
+    "deadday": null,
+    "rating": 5
+  },
+  {
+    "name": "Karmela",
+    "birthday": "1997-01-01",
+    "deadday": null,
+    "rating": 3.5
+  },
+  {
+    "name": "Marcellino",
+    "birthday": "1990-01-01",
+    "deadday": null,
+    "rating": 5
+  }
+]

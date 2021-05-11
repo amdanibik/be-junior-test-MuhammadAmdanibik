@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     language: DataTypes.STRING(30),
     status: DataTypes.STRING(10),
     rating: DataTypes.INTEGER,
-    deleted_at: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Movie',

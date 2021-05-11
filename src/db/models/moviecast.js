@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   MovieCast.init({
     movie_id: DataTypes.INTEGER,
     cast_id: DataTypes.INTEGER,
-    deleted_at: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'MovieCast',
