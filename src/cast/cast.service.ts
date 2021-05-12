@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MovieCast } from 'src/movie/movie-cast.entity';
 import { Movie } from 'src/movie/movie.entity';
 import { Cast } from './cast.entity';
 import { CastRepository } from "./cast.repository";
@@ -27,7 +28,7 @@ export class CastService {
     }
 
     async updateCast(id:number, data:CreateCastDto):Promise<Cast>{
-        const {name, birthday, deadday, rating} = data
+        const {name, birthday, deadday, rating, movieId} = data
         const update = await this.getCastById(id)
         if(!update){
             throw new NotFoundException(`cast with ID ${update.id} not found`)
@@ -36,6 +37,13 @@ export class CastService {
         update.birthday = birthday
         update.deadday = deadday
         update.rating = rating
+        update.movie_id = movieId
+
+        const idMovie:number =parseInt(movieId.toString())
+        const movieCast = new MovieCast();
+        update.cast_id = [movieCast]
+        movieCast.movie_id = idMovie
+        
         update.save()
         return update
     }

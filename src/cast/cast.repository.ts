@@ -27,10 +27,12 @@ export class CastRepository extends Repository<Cast>{
             cast.rating = rating
             cast.movie_id = movieId
 
-            const movieCast = new MovieCast()
+            const idMovie:number =parseInt(movieId.toString())
+            const movieCast = new MovieCast();
             cast.cast_id = [movieCast]
-            await this.save(cast)
+            movieCast.movie_id = idMovie
 
+            await this.save(cast)
             return cast
         }catch(err){
             console.log(err)

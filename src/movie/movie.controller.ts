@@ -34,6 +34,4 @@ export class MovieController {
         @Param('id', ParseIntPipe) id):Promise<void>{
         return this.movieService.deleteMovie(id)
     }
-
-    
 }
