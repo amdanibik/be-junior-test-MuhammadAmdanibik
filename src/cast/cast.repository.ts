@@ -40,3 +40,7 @@ export class CastRepository extends Repository<Cast>{
         
     }
 }
+
+
+@EntityRepository(MovieCast)
+export class MovieCastRepository extends Repository<MovieCast>{}
