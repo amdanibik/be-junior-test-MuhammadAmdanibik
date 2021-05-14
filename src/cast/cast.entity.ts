@@ -1,7 +1,7 @@
 
-import { MovieCast } from "src/movie/movie-cast.entity";
+import { MovieCast } from "src/cast/movie-cast.entity";
 import { Movie } from "src/movie/movie.entity";
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Cast extends BaseEntity{
@@ -21,11 +21,7 @@ export class Cast extends BaseEntity{
     rating:number
 
 
-    @ManyToOne(type => Movie, movie => movie.id, {eager:false, onDelete:"SET NULL"})
-    @JoinColumn({name:"movie_id"})
-    movie_id:Movie;
-
-    @OneToMany(type => MovieCast, movieCast=>movieCast.cast_id, {eager:false, cascade:true})
-    cast_id: MovieCast[];
+    @OneToMany(type => MovieCast, movieCast => movieCast.casts,{eager:false, cascade:true})
+    casts: MovieCast[];
 
 }

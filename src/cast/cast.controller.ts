@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { Cast } from './cast.entity';
 import { CastService } from './cast.service';
 import { CreateCastDto } from './dto/create-cast.dto';
@@ -8,8 +8,8 @@ export class CastController {
     constructor(private castService:CastService){}
 
     @Get()
-    getCast():Promise<Cast[]>{
-        return this.castService.getCast()
+    getCast(@Query() name:string):Promise<Cast[]>{
+        return this.castService.getCast(name)
     }
 
     @Get("/:id")

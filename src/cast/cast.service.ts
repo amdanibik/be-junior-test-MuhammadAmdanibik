@@ -16,8 +16,8 @@ export class CastService {
         private movieCastRepository:MovieCastRepository
     ){}
 
-    async getCast():Promise<Cast[]>{
-        let cast =  await this.castRepository.getCast();
+    async getCast(name:string = ""):Promise<Cast[]>{
+        let cast =  await this.castRepository.getCast(name);
         return cast
     }
 
@@ -44,20 +44,20 @@ export class CastService {
         update.birthday = birthday
         update.deadday = deadday
         update.rating = rating
-        update.movie_id = movieId
 
         //get movie_cast data where id = cast_id
-        const movieCast = await this.movieCastRepository.findOne({where:{cast_id:update.id}});
+        const movieCast = await this.movieCastRepository.findOne({where:{casts:update.id}});
 
         if(!movieCast){
             throw new NotFoundException(`movie cast with cast ID ${id} not found`)
         }
         // updating movie_id to movie_cast table 
-        const idMovie:number = parseInt(movieId.toString())
-        movieCast.movie_id = idMovie
-        
-        update.save()
+        movieCast.movie_id = movieId
         movieCast.save()
+        
+        //updating data to cast table
+        update.save()
+        
         return update
     }
 
