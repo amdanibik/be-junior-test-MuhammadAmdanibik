@@ -8,9 +8,9 @@ import { MovieRepository } from './movie.repository';
 export class MovieService {
     constructor(@InjectRepository(MovieRepository) private movieRepository:MovieRepository){}
        
-        async getMovies():Promise<Movie[]>{
+        async getMovies(name:string = ""):Promise<Movie[]>{
            
-            let movie = await this.movieRepository.getMovie();
+            let movie = await this.movieRepository.getMovie(name);
             return movie
         }
 

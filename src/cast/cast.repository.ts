@@ -1,6 +1,5 @@
 
 import { MovieCast } from "src/cast/movie-cast.entity";
-import { Movie } from "src/movie/movie.entity";
 import { EntityRepository, Repository } from "typeorm";
 import { Cast } from "./cast.entity";
 import { CreateCastDto } from "./dto/create-cast.dto";
@@ -9,14 +8,16 @@ import { CreateCastDto } from "./dto/create-cast.dto";
 export class CastRepository extends Repository<Cast>{
     async getCast(name:string=""):Promise<Cast[]>{
         try{
-            const query = this.createQueryBuilder('cast')
-            //add where statement if name parameter is not empty
-            name !== "" && query.where('cast.name LIKE :name',{name:`'%${name}%'`})
-            console.log(query.getQueryAndParameters())
+            //get all cast data from cast table
+            const query = this.
+            createQueryBuilder('cast')
+            //add where statement if filter parameter is not empty
+            name !== "" && query.where('cast.name LIKE :name',{name:`%${name}%`})
             const cast = query.getMany()
             return cast 
         }catch(err){
             console.log(err)
+            return err
         }
         
     }
@@ -31,15 +32,15 @@ export class CastRepository extends Repository<Cast>{
             cast.deadday = deadday
             cast.rating = rating
 
-            //insert to moviecast
+            //mapping data movie_cast table
             const movieCast = new MovieCast();
             cast.casts = [movieCast]
             movieCast.movie_id = movieId
-
+            
             await this.save(cast)
             return cast
         }catch(err){
-            console.log(err)
+            return err
         }
         
     }

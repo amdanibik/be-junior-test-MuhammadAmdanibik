@@ -56,7 +56,7 @@ export class CastService {
         movieCast.save()
         
         //updating data to cast table
-        update.save()
+        await update.save()
         
         return update
     }

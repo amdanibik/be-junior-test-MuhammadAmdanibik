@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { Movie } from './movie.entity';
 import { MovieService } from './movie.service';
@@ -8,8 +8,10 @@ export class MovieController {
     constructor(private movieService : MovieService){}
 
     @Get()
-    getMovies():Promise<Movie[]>{
-        return this.movieService.getMovies()
+    getMovies(@Query() filter):Promise<Movie[]>{
+        //if filter is not empty, add name value as param
+        const name = filter !== undefined ? filter.name : ""
+        return this.movieService.getMovies(name)
     }
 
     @Get("/:id")

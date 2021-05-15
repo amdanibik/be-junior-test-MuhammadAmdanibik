@@ -8,7 +8,8 @@ export class CastController {
     constructor(private castService:CastService){}
 
     @Get()
-    getCast(@Query() name:string):Promise<Cast[]>{
+    getCast(@Query() filter):Promise<Cast[]>{
+        const name = filter !== undefined ? filter.name : ""
         return this.castService.getCast(name)
     }
 
@@ -19,6 +20,7 @@ export class CastController {
 
     @Post()
     createCast(@Body() data:CreateCastDto):Promise<Cast>{
+        console.log(data)
         return this.castService.createCast(data)
     }
 

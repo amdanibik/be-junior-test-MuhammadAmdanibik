@@ -8,7 +8,7 @@ export class MovieCast extends BaseEntity{
     @PrimaryGeneratedColumn({type:"bigint"})
     id:number
 
-    @ManyToOne(type => Movie, movie => movie.id, {eager:false})
+    @ManyToOne(type => Movie, movie => movie.id, {onDelete:"SET NULL", onUpdate:"CASCADE"})
     @JoinColumn({name:"movie_id"})
     movie_id:Movie;
 
