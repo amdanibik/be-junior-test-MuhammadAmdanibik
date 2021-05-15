@@ -31,7 +31,7 @@ Using TypeScript as main language.
           * http://localhost:3000/cast
                * please set content-type header as application/json
                * send the body as raw json
-               * param : name, birthday, deadday, rating
+               * param : name, birthday, deadday, rating, movieId
      * PATCH
           * http://localhost:3000/cast/ID
                * please set content-type header as application/json
