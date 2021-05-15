@@ -29,11 +29,13 @@ export class MovieService {
         async updateMovie(id:number, data:CreateMovieDto):Promise<Movie>{
             const {name, language, status, rating} = data
             const update = await this.getMovieById(id)
+            
             update.name = name
             update.language = language
             update.status = status
             update.rating = rating
-            update.save()
+
+            await update.save()
             return update
         }
     

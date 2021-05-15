@@ -1,8 +1,6 @@
 
-import { Cast } from "src/cast/cast.entity";
 import { EntityRepository, Repository } from "typeorm";
 import { CreateMovieDto } from "./dto/create-movie.dto";
-import { MovieCast } from "../cast/movie-cast.entity";
 import { Movie } from "./movie.entity";
 
 @EntityRepository(Movie)
@@ -14,7 +12,7 @@ export class MovieRepository extends Repository<Movie>{
             const movie = await this.createQueryBuilder("movie")
             movie.leftJoinAndSelect("movie.moviecast", "moviecasts")
             movie.leftJoinAndSelect("moviecasts.casts", "cast")
-            
+
             //add where if filter for movie's name is not empty
             name !== "" && movie.where('movie.name LIKE :name',{name:`%${name}%`})
             const getAllMovieData = await movie.getMany()
@@ -43,6 +41,7 @@ export class MovieRepository extends Repository<Movie>{
 
         }catch(err){
             console.log(err)
+            return err
         }
         
     }
@@ -59,6 +58,7 @@ export class MovieRepository extends Repository<Movie>{
             return movie
         }catch(err){
             console.log(err)
+            return err
         }
         
     }
