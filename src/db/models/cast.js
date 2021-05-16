@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Cast extends Model {
     /**
@@ -10,20 +8,30 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Cast.belongsToMany(models.Movie, { through: "MovieCast" });
     }
-  };
-  Cast.init({
-    name: DataTypes.STRING(100),
-    birthday: DataTypes.DATE,
-    deadday: DataTypes.DATE,
-    rating: DataTypes.INTEGER,
-  }, {
-    sequelize,
-    modelName: 'Cast',
-    underscored: true,
-    paranoid: true,
-    tableName: "casts",
-  });
+  }
+  Cast.init(
+    {
+      name: DataTypes.STRING(100),
+      birthday: DataTypes.DATE,
+      deadday: DataTypes.DATE,
+      rating: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "Cast",
+      // timestamps: false,
+      underscored: true,
+      paranoid: true,
+      tableName: "casts",
+      hooks: {
+        afterCreate: (record) => {
+          delete record.dataValues.createdAt;
+          delete record.dataValues.updatedAt;
+        },
+      },
+    }
+  );
   return Cast;
 };

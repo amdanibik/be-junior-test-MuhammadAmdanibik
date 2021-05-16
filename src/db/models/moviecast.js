@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
     paranoid: true,
     tableName: "moviecasts",
+    hooks: {
+      afterCreate: (record) => {
+        delete record.dataValues.createdAt;
+        delete record.dataValues.updatedAt;
+      },
+    },
   });
   return MovieCast;
 };

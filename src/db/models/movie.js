@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Movie.belongsToMany(models.Cast, {through : "MovieCast"})
     }
   };
   Movie.init({
@@ -23,7 +23,13 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Movie',
     underscored: true,
     paranoid: true,
-    tableName : "movies"
+    tableName : "movies",
+    hooks: {
+      afterCreate: (record) => {
+        delete record.dataValues.createdAt;
+        delete record.dataValues.updatedAt;
+      },
+    },
   });
   return Movie;
 };
