@@ -71,7 +71,7 @@ class CastController {
         message: "success create cast",
         data: result,
       };
-      return baseResponse(payload)(res);
+      return baseResponse(payload)(res, 201);
     } catch (error) {
       next(error);
     }
