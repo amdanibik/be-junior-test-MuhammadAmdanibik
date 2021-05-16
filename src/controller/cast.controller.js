@@ -8,12 +8,56 @@ class CastController {
         include: [
           {
             model: db.Movie,
-            attributes: { exclude: ["created_at"] },
             through: { attributes: [] },
           },
         ],
       });
-      return res.json(result);
+      const payload = {
+        success: true,
+        message: "success get list of casts",
+        data: result,
+      };
+      return baseResponse(payload)(res);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async castById(req, res, next) {
+    try {
+      const result = await db.Cast.findByPk(req.params.id);
+      const payload = {
+        success: true,
+        message: "success get cast",
+        data: result,
+      };
+      return baseResponse(payload)(res);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async delete(req, res, next) {
+    try {
+      const status = await db.Cast.destroy({ where : { id :req.params.id}});
+      if(status) {
+        res.status(204).end()
+      } else {
+        throw new Error("no field deleted !")
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async restore(req, res, next) {
+    try {
+      const status = await db.Cast.restore({ where : { id :req.params.id}});
+      if(status) {
+        res.status(200).end()
+      } else {
+        throw new Error("no field restored !")
+      }
     } catch (error) {
       next(error);
     }
@@ -35,20 +79,22 @@ class CastController {
 
   static async update(req, res, next) {
     try {
-      const result = db.Cast.update(req.body, {
+      const [_, data] = await db.Cast.update(req.body, {
         where: {
           id: req.params.id,
         },
-        returning : true,
-        plain: true
-      }).then((res) => console.log("res",res))
-      console.log("update", result)
-      const payload = {
-        success: true,
-        message: "success update cast",
-        data: result,
-      };
-      return baseResponse(payload)(res);
+        individualHooks: true,
+      });
+      if (data !== []) {
+        const payload = {
+          success: true,
+          message: "success update cast",
+          data: data[0],
+        };
+        return baseResponse(payload)(res);
+      } else {
+        throw new Error("no field updated !");
+      }
     } catch (error) {
       next(error);
     }

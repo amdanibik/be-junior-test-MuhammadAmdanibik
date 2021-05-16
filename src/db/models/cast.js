@@ -17,11 +17,14 @@ module.exports = (sequelize, DataTypes) => {
       birthday: DataTypes.DATE,
       deadday: DataTypes.DATE,
       rating: DataTypes.INTEGER,
+      deletedAt: {
+        field : "deleted_at",
+        type: DataTypes.DATE
+      }
     },
     {
       sequelize,
       modelName: "Cast",
-      // timestamps: false,
       underscored: true,
       paranoid: true,
       tableName: "casts",
@@ -29,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
         afterCreate: (record) => {
           delete record.dataValues.createdAt;
           delete record.dataValues.updatedAt;
+        },
+        afterUpdate: (record) => {
+          delete record.dataValues.deletedAt;
         },
       },
     }
