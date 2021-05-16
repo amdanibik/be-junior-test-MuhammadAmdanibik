@@ -19,7 +19,7 @@ let createMovie = yup.object().shape({
   language: yup.string().required(),
   status: yup.string().required(),
   rating: yup.number().required().max(5).min(0),
-  casts: yup.array().required().min(1)
+  casts: yup.array().min(1)
 });
 
 module.exports = {
