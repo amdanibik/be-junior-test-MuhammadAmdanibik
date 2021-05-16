@@ -14,7 +14,16 @@ let updateCast = yup.object().shape({
   rating: yup.number().max(5).min(0),
 });
 
+let createMovie = yup.object().shape({
+  name: yup.string().required(),
+  language: yup.string().required(),
+  status: yup.string().required(),
+  rating: yup.number().required().max(5).min(0),
+  casts: yup.array().required().min(1)
+});
+
 module.exports = {
   createCast,
-  updateCast
+  updateCast,
+  createMovie
 };
