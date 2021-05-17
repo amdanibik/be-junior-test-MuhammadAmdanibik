@@ -22,8 +22,17 @@ let createMovie = yup.object().shape({
   casts: yup.array().min(1).nullable()
 });
 
+let updateMovie = yup.object().shape({
+  name: yup.string(),
+  language: yup.string(),
+  status: yup.string(),
+  rating: yup.number().max(5).min(0),
+  casts: yup.array().min(1).nullable()
+});
+
 module.exports = {
   createCast,
   updateCast,
-  createMovie
+  createMovie,
+  updateMovie
 };

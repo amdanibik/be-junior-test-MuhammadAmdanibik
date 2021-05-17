@@ -29,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
         delete record.dataValues.createdAt;
         delete record.dataValues.updatedAt;
       },
+      afterUpdate: (record) => {
+        delete record.dataValues.deletedAt;
+      },
     },
   });
   return Movie;
