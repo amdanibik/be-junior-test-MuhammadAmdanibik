@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  db:
+    container_name: mysql-movies
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3309:3306"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-movies
+    working_dir: /usr/src/app
+    environment:
+      DB_USERNAME: root
+      DB_NAME: campaign_movies
+      DB_PASSWORD: password
+      DB_HOST: mysql-movies
+      DB_DIALECT: mysql
+      DB_PORT: 3306
+    depends_on:
+      - db
+    command: >
+      sh -c "./wait-for-it.sh mysql-movies:3306 -- npm run migrate &&
+              npm run dev"
+    ports:
+      - "3000:3000"
