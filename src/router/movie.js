@@ -7,6 +7,7 @@ const validation = require("../middleware/validation");
 router
   .get("/", MovieController.list)
   .delete("/:id", MovieController.delete)
+  .get("/restore/:id", MovieController.restore)
   .get("/:id", MovieController.getById)
   .put("/:id", MovieController.update)
   .post("/", validation(createMovie), MovieController.insert)
