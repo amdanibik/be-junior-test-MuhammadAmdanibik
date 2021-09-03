@@ -108,6 +108,22 @@ const getMovie = async (req, res) => {
     res.send(data);
 }
 
+const updateMovie = async (req, res, next) => {
+    const { id } = req.params; 
+    const { name, language, rating, status } = req.body;
+    await Movie.update({
+        name, language, rating, status
+    }, {
+        where: {
+            id
+        }
+    });
+    res.send({
+        message: "success",
+        data: { name, language, rating, status }
+    })
+}
+
 const deleteMovie = async (req, res) => {
     const { id } = req.params;
     await Movie.destroy({
@@ -120,5 +136,5 @@ const deleteMovie = async (req, res) => {
     });
 }
 
-module.exports = { addMovie, getMovie, getMovies, deleteMovie }
+module.exports = { addMovie, getMovie, getMovies, deleteMovie, updateMovie }
 

@@ -87,6 +87,22 @@ const getCasts = async (req, res) => {
     res.send(data);
 }
 
+const updateCast = async (req, res) => {
+    const { id } = req.params;
+    const { name, birthday, deadday, rating } = req.body;
+    await Cast.update({
+        name, birthday, deadday, rating
+    }, {
+        where: {
+            id
+        }
+    })
+    res.send({
+        message: "success",
+        data: { name, birthday, deadday, rating }
+    })
+}
+
 const deleteCast = async (req, res) => {
     const { id } = req.params;
     await Cast.destroy({
@@ -99,4 +115,4 @@ const deleteCast = async (req, res) => {
     });
 }
 
-module.exports = { addCast, getCast, getCasts, deleteCast };
+module.exports = { addCast, getCast, getCasts, deleteCast, updateCast };

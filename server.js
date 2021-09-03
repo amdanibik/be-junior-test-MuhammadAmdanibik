@@ -2,7 +2,7 @@ const express = require('express');
 const Sequelize = require('sequelize');
 
 const movieRoutes = require('./routes/movies');
-const castRoutes = require('./routes/casts')
+const castRoutes = require('./routes/casts');
 
 const app = express();
 
