@@ -1,0 +1,862 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Screening Test API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "Screening Test API server"
+    }
+  ],
+  "paths": {
+    "/movie": {
+      "get": {
+        "summary": "Get all movies",
+        "description": "Get all data for movies with cast from database",
+        "responses": {
+          "200": {
+            "description": "Success get all movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "movies": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "language": {
+                            "type": "string"
+                          },
+                          "rating": {
+                            "type": "number"
+                          },
+                          "casts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string"
+                                },
+                                "birthday": {
+                                  "type": "string"
+                                },
+                                "deadday": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new movie",
+        "description": "Create new movie to database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5
+                  }
+                }
+              },
+              "examples": {
+                "Avenger": {
+                  "description": "Example create data movie",
+                  "value": {
+                    "name": "Avenger",
+                    "language": "English",
+                    "status": "started",
+                    "rating": 5
+                  }
+                },
+                "X-Men": {
+                  "description": "Example create data movie",
+                  "value": {
+                    "name": "X-Men",
+                    "language": "English",
+                    "status": "ended",
+                    "rating": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success add a movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "language": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "rating": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movie/{movieId}": {
+      "get": {
+        "summary": "Get movie by id",
+        "description": "Get data movie by id in database",
+        "responses": {
+          "200": {
+            "description": "Success get movie by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "movies": {
+                      "type": "object",
+                      "properties": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "language": {
+                              "type": "string",
+                              "format": "yyyy-MM-dd"
+                            },
+                            "rating": {
+                              "type": "number"
+                            },
+                            "casts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "birthday": {
+                                    "type": "string"
+                                  },
+                                  "deadday": {
+                                    "type": "string"
+                                  },
+                                  "rating": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "movieId",
+            "description": "Movie for Updated",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "examples": {
+              "Avenger": {
+                "description": "Sample id for Avenger",
+                "value": 1
+              },
+              "X-Men": {
+                "description": "Sample id for Avenger",
+                "value": 2
+              }
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update data movie",
+        "description": "Update existing data movie in database",
+        "responses": {
+          "200": {
+            "description": "Success add a movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "language": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "rating": {
+                          "type": "number"
+                        },
+                        "createAt": {
+                          "type": "string"
+                        },
+                        "updateAt": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "movieId",
+            "description": "Movie for Updated",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "examples": {
+              "Avenger": {
+                "description": "Sample id for Avenger",
+                "value": 1
+              },
+              "X-Men": {
+                "description": "Sample id for Avenger",
+                "value": 2
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5
+                  }
+                }
+              },
+              "examples": {
+                "Avenger": {
+                  "description": "Example update data movie",
+                  "value": {
+                    "name": "Avenger",
+                    "language": "English",
+                    "status": "started",
+                    "rating": 5
+                  }
+                },
+                "X-Men": {
+                  "description": "Example update data movie",
+                  "value": {
+                    "name": "X-Men",
+                    "language": "English",
+                    "status": "ended",
+                    "rating": 2
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete data movie",
+        "description": "Delete existing data movie in database",
+        "responses": {
+          "200": {
+            "description": "Success get all movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "movieId",
+            "description": "Movie for deleted",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "examples": {
+              "Avenger": {
+                "description": "Sample id for Avenger",
+                "value": 1
+              },
+              "X-Men": {
+                "description": "Sample id for Avenger",
+                "value": 2
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/cast": {
+      "get": {
+        "summary": "Get all casts",
+        "description": "Get all data for casts with movie from database",
+        "responses": {
+          "200": {
+            "description": "Success get all cast",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "casts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "birtday": {
+                            "type": "string",
+                            "format": "yyyy-MM-dd"
+                          },
+                          "deadday": {
+                            "type": "string",
+                            "format": "yyyy-MM-dd"
+                          },
+                          "rating": {
+                            "type": "number"
+                          },
+                          "movies": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "language": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string"
+                                },
+                                "rating": {
+                                  "type": "number"
+                                },
+                                "createAt": {
+                                  "type": "string"
+                                },
+                                "updateAt": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new cast",
+        "description": "Create new movie to database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "birthday": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "YYYY-MM-DD"
+                  },
+                  "deadday": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "YYYY-MM-DD"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5
+                  }
+                }
+              },
+              "examples": {
+                "Jhon Thor": {
+                  "description": "Example Create cast",
+                  "value": {
+                    "name": "Jhon Thor",
+                    "birthday": "1998-12-01",
+                    "deadday": "2019-12-03",
+                    "rating": 5
+                  }
+                },
+                "Tanji Dhor": {
+                  "description": "Example Create cast",
+                  "value": {
+                    "name": "Tanji Dhor",
+                    "birthday": "1998-12-01",
+                    "deadday": null,
+                    "rating": 5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success add a cast",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "birthday": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "deadday": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "rating": {
+                          "type": "number"
+                        },
+                        "createAt": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "updateAt": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cast/{castId}": {
+      "put": {
+        "summary": "Edit data cast",
+        "description": "Edit existing cast in database",
+        "responses": {
+          "200": {
+            "description": "Success add a cast",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "birthday": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "deadday": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "rating": {
+                          "type": "number"
+                        },
+                        "createAt": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "updateAt": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "castId",
+            "description": "Cast for update",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "examples": {
+              "Jhon Thor": {
+                "description": "Sample id for Jhon Thor",
+                "value": 1
+              },
+              "Tanji Dhor": {
+                "description": "Sample id for Tanji Dhor",
+                "value": 2
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "birthday": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "YYYY-MM-DD"
+                  },
+                  "deadday": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "YYYY-MM-DD"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5
+                  }
+                }
+              },
+              "examples": {
+                "Jhon Thor": {
+                  "description": "Example Create cast",
+                  "value": {
+                    "name": "Jhon Thor",
+                    "birthday": "1998-12-01",
+                    "deadday": "2019-12-03",
+                    "rating": 5
+                  }
+                },
+                "Tanji Dhor": {
+                  "description": "Example Create cast",
+                  "value": {
+                    "name": "Tanji Dhor",
+                    "birthday": "1998-12-01",
+                    "deadday": null,
+                    "rating": 5
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete data cast",
+        "description": "Delete existing cast in database",
+        "responses": {
+          "200": {
+            "description": "Success get all movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "castId",
+            "description": "Cast for update",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "examples": {
+              "Jhon Thor": {
+                "description": "Sample id for Jhon Thor",
+                "value": 1
+              },
+              "Tanji Dhor": {
+                "description": "Sample id for Tanji Dhor",
+                "value": 2
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
