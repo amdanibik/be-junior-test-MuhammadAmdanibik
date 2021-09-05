@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
           args: [1,100],
           msg: `movie's name too short or too long`
         }
-      }
+      },
     },
     birthday: {
       type: DataTypes.DATE,
@@ -44,10 +44,6 @@ module.exports = (sequelize, DataTypes) => {
         isDate: {
           msg: `only allow date for birthday`,
           args: true
-        },
-        isBefore: {
-          msg: `birthday cannot be today`,
-          args: new Date().toLocaleDateString()
         }
       }
     },
@@ -56,12 +52,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       validate: {
         isDate: {
-          msg: `only allow date for birthday`,
+          msg: `only allow date for deadday`,
           args: true
-        },
-        isBefore: {
-          msg: `birthday cannot be today`,
-          args: new Date().toLocaleDateString()
         }
       }
     },
