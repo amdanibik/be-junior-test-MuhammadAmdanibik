@@ -14,7 +14,7 @@ module.exports = async (req,res,next) => {
             rating: req.body.rating
         }
 
-        const movie_id = req.body.movie_id
+        const movie_id = req.body.movie_id 
         
         const cast = await Cast.create(payload,{
             transaction: t
@@ -36,7 +36,7 @@ module.exports = async (req,res,next) => {
         })
     } catch (err) {
         if(err) await t.rollback()
-        
+
         next(err)
     }
 }
