@@ -19,7 +19,10 @@ module.exports = {
     password,
     database,
     host,
-    dialect
+    dialect,
+    define: {
+      timestamps: false
+    }
   },
   "test": {
     username,

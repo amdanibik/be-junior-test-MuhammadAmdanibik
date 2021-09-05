@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Movie.belongsToMany(models.Cast, { through: models.MovieCast, foreignKey: 'movie_id'})
     }
   };
   Movie.init({

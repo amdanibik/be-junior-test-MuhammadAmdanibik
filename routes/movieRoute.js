@@ -1,6 +1,13 @@
 
 const router = require('express').Router()
+const MovieController = require('../controllers').MovieController
 
-router.get('/ping',(req,res) => res.send("pong"))
+router.get('/',MovieController.getMovies)
+router.get('/:id',MovieController.getMovieById)
+
+router.post('/',MovieController.createMovie)
+
+router.put('/:id',MovieController.editMovie)
+router.delete('/:id',MovieController.deleteMovie)
 
 module.exports = router
