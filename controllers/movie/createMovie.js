@@ -10,11 +10,13 @@ module.exports = async (req,res,next) => {
             rating: req.body.rating
         }
 
-        const movie = Movie.create(payload,{
+        await Movie.create(payload,{
             returning: true
         })
 
-        res.status(200).json(movie)
+        res.status(200).json({
+            message: 'ok'
+        })
     } catch (err) {
         next(err)
     }

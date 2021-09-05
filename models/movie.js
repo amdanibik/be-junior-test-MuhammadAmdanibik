@@ -20,16 +20,69 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: `Employee's name can't be empty !`
+          msg: `movie's name can't be empty !`
         },
         notEmpty: {
-          msg: `Employee's name can't be empty !`
+          msg: `movie's name can't be empty !`
+        },
+        len: {
+          args: [1,100],
+          msg: `movie's name too short or too long`
         }
       }
     },
-    language: DataTypes.STRING,
-    status: DataTypes.STRING,
-    rating: DataTypes.INTEGER
+    language: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `language can't be empty !`
+        },
+        notEmpty: {
+          msg: `language can't be empty !`
+        },
+        len: {
+          args: [1,30],
+          msg: `language too short or too long`
+        }
+      }
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `status can't be empty !`
+        },
+        notEmpty: {
+          msg: `status can't be empty !`
+        },
+        len: {
+          args: [1,10],
+          msg: `status too short or too long`
+        }
+      }
+    },
+    rating: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `rating range is 1-5 !`
+        },
+        isInt: {
+          msg: `rating can only be valid integer`
+        },
+        min: {
+          args: 1,
+          msg: 'min rating is 1'
+        },
+        max:{
+          args: 5,
+          msg: 'max rating is 5'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Movie',
