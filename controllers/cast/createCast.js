@@ -12,7 +12,7 @@ module.exports = async (req,res,next) => {
 
         await Cast.create(payload)
 
-        res.status(200).json({
+        res.status(201).json({
             message: 'ok'
         })
     } catch (err) {

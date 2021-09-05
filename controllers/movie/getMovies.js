@@ -2,9 +2,10 @@ const { Movie, Cast } = require('../../models')
 
 
 module.exports = async (req,res,next) => {
-    let page = req.query.page || 0
-
+    
     try {
+        let page = req.query.page || 0
+        
         const movies = await Movie.findAll({
             include: [
                 {
