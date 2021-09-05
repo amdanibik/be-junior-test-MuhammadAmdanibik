@@ -15,10 +15,73 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Cast.init({
-    name: DataTypes.STRING,
-    birthday: DataTypes.DATE,
-    deadday: DataTypes.DATE,
-    rating: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `movie's name can't be null !`
+        },
+        notEmpty: {
+          msg: `movie's name can't be empty !`
+        },
+        len: {
+          args: [1,100],
+          msg: `movie's name too short or too long`
+        }
+      }
+    },
+    birthday: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `birthday can't be null !`
+        },
+        notEmpty: {
+          msg: `birthday can't be empty !`
+        },
+        isDate: {
+          msg: `only allow date for birthday`,
+          args: true
+        },
+        isBefore: {
+          msg: `birthday cannot be today`,
+          args: new Date().toLocaleDateString()
+        }
+      }
+    },
+    deadday: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      validate: {
+        isDate: {
+          msg: `only allow date for birthday`,
+          args: true
+        },
+        isBefore: {
+          msg: `birthday cannot be today`,
+          args: new Date().toLocaleDateString()
+        }
+      }
+    },
+    rating: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        isInt: {
+          msg: `rating can only be valid integer`
+        },
+        min: {
+          args: 1,
+          msg: 'min rating is 1'
+        },
+        max:{
+          args: 5,
+          msg: 'max rating is 5'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Cast',

@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: `movie's name can't be empty !`
+          msg: `movie's name can't be null !`
         },
         notEmpty: {
           msg: `movie's name can't be empty !`
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: `language can't be empty !`
+          msg: `language can't be null !`
         },
         notEmpty: {
           msg: `language can't be empty !`
@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: `status can't be empty !`
+          msg: `status can't be null !`
         },
         notEmpty: {
           msg: `status can't be empty !`
@@ -65,11 +65,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     rating: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       validate: {
-        notNull: {
-          msg: `rating range is 1-5 !`
-        },
         isInt: {
           msg: `rating can only be valid integer`
         },
