@@ -29,14 +29,20 @@ module.exports = {
     password,
     database,
     host,
-    dialect
+    dialect,
+    define: {
+      timestamps: false
+    }
   },
   "production": {
     username,
     password,
     database,
     host,
-    dialect
+    dialect,
+    define: {
+      timestamps: false
+    }
   }
 }
 

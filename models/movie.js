@@ -15,7 +15,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Movie.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Employee's name can't be empty !`
+        },
+        notEmpty: {
+          msg: `Employee's name can't be empty !`
+        }
+      }
+    },
     language: DataTypes.STRING,
     status: DataTypes.STRING,
     rating: DataTypes.INTEGER
