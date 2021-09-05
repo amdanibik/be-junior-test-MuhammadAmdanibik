@@ -11,11 +11,34 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      
     }
   };
   MovieCast.init({
-    movie_id: DataTypes.INTEGER,
-    cast_id: DataTypes.INTEGER
+    movie_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `movie_id can't be null !`
+        },
+        isInt: {
+          msg: `movie_id must be integer`
+        }
+      }
+    },
+    cast_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `cast_id can't be null !`
+        },
+        isInt: {
+          msg: `cast_id must be integer`
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'MovieCast',
