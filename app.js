@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 app.get('/',(req,res) => {
-    res.send("hello world")
+    res.send("hello world  ")
 })
 
 app.listen(PORT, () => {
