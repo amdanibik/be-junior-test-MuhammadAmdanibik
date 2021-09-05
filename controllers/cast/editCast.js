@@ -3,6 +3,7 @@ const { Cast } = require('../../models')
 module.exports = async (req,res,next) => {
 
     try {
+
         let id = +req.params.id
 
         if(isNaN(id)) throw {
@@ -13,20 +14,22 @@ module.exports = async (req,res,next) => {
         const payload = {
             name: req.body.name,
             birthday: req.body.birthday,
-            deadday: req.body.status,
+            deadday: req.body.deadday,
             rating: req.body.rating
         }
         
         const cast = await Cast.update(payload, {
             where: {
                 id
-            }
+            },
         })
 
         res.status(200).json({
-            message: cast
+            cast
         })
     } catch (err) {
+        
         next(err)
     }
+
 }

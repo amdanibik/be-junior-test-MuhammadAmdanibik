@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     cast_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+      unique: {
+        name: `unique_cast_id`,
+        msg: `movie already has this cast`
+      },
       validate: {
         notNull: {
           msg: `cast_id can't be null !`
