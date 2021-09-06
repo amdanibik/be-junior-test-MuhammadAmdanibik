@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       
-      // belongsToMany to MovieCast but not to Cast
+      // belongsToMany to MovieCast and to Cast
       Movie.belongsToMany( models.Cast , { through: models.MovieCast, foreignKey: 'movie_id' , as:'casts'})
     }
   };
