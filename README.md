@@ -1,10 +1,14 @@
 # Screening Test API #
 
 ## How to run #
-1. After clone this repo run npm install
+1. After clone this repo run `npm install`
 2. configure database in Config.js
-3. npm run migrate
+3. `npm run migrate`
 4. npm start
+
+## Unit Testing ##
+- mocha and chai
+- `npm test`
 
 
 ## Documentations API ##
