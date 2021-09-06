@@ -663,6 +663,119 @@
       }
     },
     "/cast/{castId}": {
+      "get": {
+        "summary": "Get data cast by id",
+        "description": "Get data cast by id in database",
+        "responses": {
+          "200": {
+            "description": "Success get a cast",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cast": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "birthday": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "deadday": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "rating": {
+                          "type": "number"
+                        },
+                        "createAt": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "updateAt": {
+                          "type": "string",
+                          "format": "yyyy-MM-dd"
+                        },
+                        "movies": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "language": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "rating": {
+                                "type": "integer"
+                              },
+                              "createdAt": {
+                                "type": "string"
+                              },
+                              "updatedAt": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "castId",
+            "description": "Cast for update",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "examples": {
+              "Jhon Thor": {
+                "description": "Sample id for Jhon Thor",
+                "value": 1
+              },
+              "Tanji Dhor": {
+                "description": "Sample id for Tanji Dhor",
+                "value": 2
+              }
+            }
+          }
+        ]
+      },
       "put": {
         "summary": "Edit data cast",
         "description": "Edit existing cast in database",
