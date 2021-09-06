@@ -42,3 +42,9 @@ $ yarn dev
 Running the above commands results in
 
 - 🌏**API Server** Server listing at `http://localhost:5555`
+
+## API Documentation
+
+API documentation using postman.
+
+- URL = https://documenter.getpostman.com/view/14471251/U16gPSvr
