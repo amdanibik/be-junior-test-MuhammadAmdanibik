@@ -4,11 +4,6 @@
 
 #### 1. Clone this repo
 
-```
-$ git clone git@github.com:mnfirdauss/sebis.git your-app-name
-$ cd your-app-name
-```
-
 #### 2. Install dependencies
 
 ```
