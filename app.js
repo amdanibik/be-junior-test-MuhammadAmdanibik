@@ -16,3 +16,5 @@ app.use("/api/v1", router);
 app.use(errorNotFound);
 
 app.listen(port, () => console.log(`App running on port ${port}`));
+
+module.exports = app;
